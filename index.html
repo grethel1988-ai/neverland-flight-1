@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>永無島的初次飛翔：星空、仙塵與遺失的玩具｜國小低年級國語文冒險測驗</title>
+  <meta name="description" content="結合彼得潘永無島冒險劇情的遊戲式線上測驗，涵蓋國小第一學習階段（低年級）國語文能力指標：注音、部首、筆畫、標點、閱讀理解與四字語詞。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=7">
+</head>
+<body>
+  <div id="bg" class="bg"></div>
+  <canvas id="dust"></canvas>
+
+  <main id="app">
+    <!-- 封面 -->
+    <section id="scr-title" class="screen active">
+      <div class="title-wrap">
+        <p class="badge">✦ 永無島三部曲 第一部 ✦</p>
+        <h1 class="logo">永無島的初次飛翔<span>星空、仙塵與遺失的玩具</span></h1>
+        <p class="subtitle">國小國語文第一階段（低年級）能力指標題目總匯</p>
+      </div>
+      <div class="vn-box title-vn">
+        <div class="vn-name">前情提要</div>
+        <p id="prologue" class="vn-text"></p>
+      </div>
+      <div class="title-form glass">
+        <label for="inp-name">冒險者姓名</label>
+        <input id="inp-name" maxlength="12" placeholder="請輸入你的名字" autocomplete="off">
+        <div class="diff-row" id="diff-row">
+          <button class="diff" data-n="25" id="btn-d25"><b>見習飛行員</b><small>25題・🧸小熊×5</small></button>
+          <button class="diff" data-n="40" id="btn-d40"><b>仙塵冒險家</b><small>40題・🧸小熊×7</small></button>
+          <button class="diff" data-n="50" id="btn-d50"><b>永無島英雄</b><small>50題・🧸小熊×10</small></button>
+        </div>
+        <p id="title-err" class="err"></p>
+        <button id="btn-start" class="btn-main">出發冒險 ▶</button>
+      </div>
+    </section>
+
+    <!-- 選夥伴 -->
+    <section id="scr-partner" class="screen">
+      <h2 class="scr-h">選一位夥伴陪你冒險！</h2>
+      <div id="partner-grid" class="partner-grid"></div>
+      <div class="vn-box partner-vn"><div class="vn-name" id="pv-name">？？？</div><p id="pv-text" class="vn-text">點選一位夥伴，聽聽他想說什麼吧！</p></div>
+      <button id="btn-partner-go" class="btn-main" disabled>就決定是你了！</button>
+    </section>
+
+    <!-- 劇情 -->
+    <section id="scr-story" class="screen">
+      <div class="stage-banner" id="st-banner"></div>
+      <div class="stand left" id="st-left"></div>
+      <div class="stand right" id="st-right"></div>
+      <div class="vn-box story-vn" id="st-box">
+        <div class="vn-name" id="st-name"></div>
+        <p class="vn-text" id="st-text"></p>
+        <span class="vn-next">▼</span>
+      </div>
+    </section>
+
+    <!-- 答題 -->
+    <section id="scr-quiz" class="screen">
+      <header class="hud">
+        <div class="hud-player"><span class="hud-name" id="hud-name"></span><span class="hud-diff" id="hud-diff"></span></div>
+        <div class="hud-stage" id="hud-stage"></div>
+        <div class="hud-prog"><div class="bar"><i id="hud-bar"></i></div></div>
+        <div class="hud-life" id="hud-life"></div>
+        <div class="hud-score"><span class="lbl">得分</span><b id="hud-score">0</b><small>/100</small><span class="sep"></span><span id="hud-count"></span></div>
+      </header>
+      <div class="quiz-body">
+        <aside class="passage glass" id="passage" hidden><h3 id="ps-title"></h3><p id="ps-text"></p></aside>
+        <div class="qcard glass" id="qcard">
+          <div class="q-tag" id="q-tag"></div>
+          <p class="q-text" id="q-text"></p>
+          <div class="q-area" id="q-area"></div>
+          <div class="q-actions"><button id="btn-check" class="btn-main small" hidden>確定答案</button></div>
+        </div>
+      </div>
+      <div class="vn-box quiz-vn">
+        <div class="face" id="fb-face"></div>
+        <div class="vn-name" id="fb-name"></div>
+        <p class="vn-text" id="fb-text"></p>
+        <button id="btn-next" class="btn-main small" hidden>下一題 ▶</button>
+      </div>
+    </section>
+
+    <!-- 失敗 -->
+    <section id="scr-over" class="screen">
+      <div class="glass over-card">
+        <h2>小熊軟糖吃光了……</h2>
+        <div class="face big" id="over-face"></div>
+        <p id="over-text"></p>
+        <button id="btn-retry" class="btn-main">再飛一次 ↺</button>
+      </div>
+    </section>
+
+    <!-- 證書 -->
+    <section id="scr-cert" class="screen">
+      <div class="cert" id="cert">
+        <div class="cert-inner">
+          <p class="cert-top">✦ 永無島冒險公會 ✦</p>
+          <h2>尋熊小隊 榮譽證書</h2>
+          <p class="cert-name"><span id="c-name"></span> 小勇士</p>
+          <p class="cert-body">在 <b id="c-partner"></b> 的陪伴下，以「<b id="c-diff" class="c-diff"></b>」難度完成冒險，<br>
+            答對 <b id="c-right"></b> / <span id="c-total"></span> 題，成功幫麥克找回了泰迪熊！</p>
+          <p class="cert-score">得分 <b id="c-score"></b> <small>/ 100 分</small></p>
+          <p class="cert-rank" id="c-rank"></p>
+          <div class="cert-foot"><span id="c-date"></span><span class="seal">仙塵<br>認證</span></div>
+        </div>
+      </div>
+      <div class="cert-btns"><button id="btn-print" class="btn-main small">列印證書 🖨</button><button id="btn-again" class="btn-main small ghost">重新闖關 ↺</button></div>
+    </section>
+  </main>
+
+  <div id="ghost" class="chip ghost-chip" hidden></div>
+  <div id="dev" class="dev" hidden></div>
+
+  <script src="js/bank_mc.js?v=7"></script>
+  <script src="js/bank_drag.js?v=7"></script>
+  <script src="js/game.js?v=7"></script>
+</body>
+</html>
