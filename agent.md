@@ -9,9 +9,12 @@
 - 截圖與設計規範：`D:\永無島三部曲\畫面設計參考\`（給第二、三部統一風格）
 - 目前資源版本號：`?v=7`（改 CSS/JS 後要遞增）
 
+## 部署（2026-10-26）
+- Repo（公開）：https://github.com/grethel1988-ai/neverland-flight-1
+- GitHub Pages：https://grethel1988-ai.github.io/neverland-flight-1/ （main 分支根目錄）
+
 ## 下一步
 - 實機（平板／手機）試玩，確認不出現捲軸
-- 建 GitHub repo 並部署 GitHub Pages（尚未初始化 git）
 - 第二部（中年級）需中年級題庫，沿用「畫面設計參考」
 
 ## 踩坑
